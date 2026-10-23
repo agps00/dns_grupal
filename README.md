@@ -9,10 +9,10 @@ Después de las configuraciones habituales de netplan, hacer la respectiva insta
 
 ---
 
-## 2. 
+## 2. El primero “named.conf.local”
 
-El primero “named.conf.local”, donde declaró las zonas DNS y le indica a BIND9 que dominios y zonas debe gestionar.
-Luego declaró la zona directa del dominio.
+DeclarO las zonas DNS y le indica a BIND9 que dominios y zonas debe gestionar.
+Luego declaro la zona directa del dominio.
 Indico que soy el maestro en el servidor “type master;” 
 También el archivo que contiene cualquier registro con el file “ dirección “.
 Con “allow-transfer” le doy permiso al DNS esclavo copie o pida una transferencia de la zona.
