@@ -1,56 +1,50 @@
 # dns_grupal : parte DNS master
 
-## 1. Configuración de fichero "named.conf.local"
+## 1. Configuración de direcciones ip
 
 Después de las configuraciones habituales de netplan, hacer la respectiva instalación de bind9, yo como dns master debo configurar 4 ficheros.
 
 
-```bash
-El primero “named.conf.local”, donde declaró las zonas DNS y le indica a BIND9 que dominios y zonas debe gestionar.
-
-```
 ![1º](images/paso_01.png)
 
 ---
 
-## 2. Instalación del ssh
+## 2. 
 
-Se instaló el servidor SSH para permitir la administración remota de la máquina:
+El primero “named.conf.local”, donde declaró las zonas DNS y le indica a BIND9 que dominios y zonas debe gestionar.
+Luego declaró la zona directa del dominio.
+Indico que soy el maestro en el servidor “type master;” 
+También el archivo que contiene cualquier registro con el file “ dirección “.
+Con “allow-transfer” le doy permiso al DNS esclavo copie o pida una transferencia de la zona.
+Y a su vez declaró la zona inversa con los aspectos similares.
 
-```bash
-sudo apt install -y openssh-server
-```
-![Actualización de repositorios](images/02_shh.png)
 
----
-
-## 3. Instalación de las dependencias de Webmin
-
-Se instalaron las herramientas necesarias para configurar el repositorio de Webmin:
-
-```bash
-sudo apt install -y software-properties-common apt-transport-https
-```
-![Actualización de repositorios](images/03_dependencias_webmin.png)
+![2º](images/02.png)
 
 ---
 
-## 4. Descarga del script
+## 3. Creación y configuración del archivo db.daw2.com
 
-```bash
-curl -o webmin-setup-repo.sh https://raw.githubusercontent.com/webmin/webmin/master/webmin-setup-repo.sh
-```
-![Actualización de repositorios](images/04_descargar_script.png)
+Este archivo va contener los registros que permiten convertir un dominio en una IP.
+
+![3º](images/03.png)
+
+dns.daw2.com.  Es el servidor principal asociado a la zona y lap-admin.daw2.com. Es el contacto administrativo de la zona.
 
 ---
 
-## 5. Configuración del repositorio de Webmin
+## 4. Turno del db.192
 
-Este script configura el repositorio necesario para poder instalar Webmin mediante APT.
+Este fichero trabaja la zona inversa
+![4º](images/04.png)
+Acá el fichero asocia la IP con el dominio.
 
-```bash
-sudo sh webmin-setup-repo.sh
-```
-![Actualización de repositorios](images/05_configuración_repositorio.png)
+---
+
+## 5. Por último el archivo named.conf.option:
+
+Debo establecer la configuración general del servidor.
+
+![5º](images/05.png)
 
 ---
